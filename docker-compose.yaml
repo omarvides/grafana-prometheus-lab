@@ -1,0 +1,35 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana:6.7.2
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+    links:
+      - "prometheus:prometheus"
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    ports:
+      - 9090:9090
+    networks:
+      - monitoring
+    volumes:
+      - "./prometheus.yaml:/etc/prometheus/prometheus.yml"
+    depends_on:
+      - backend
+    links:
+      - "backend:backend"
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
