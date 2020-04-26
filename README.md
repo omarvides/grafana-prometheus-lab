@@ -132,7 +132,7 @@ go version go1.13.5 darwin/amd64
     - /simple-search
     - /quicksort
     - /section-sort
-    ...
+    - ...
 - [ ] Add an endpoint that can change the behavior of the `backend` API returning different type of HTTP codes, for example
     - /return-codes/:http-code/:how-long
     - /return-random-errors/:how-long
