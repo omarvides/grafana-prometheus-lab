@@ -123,6 +123,19 @@ go version go1.13.5 darwin/amd64
 
 ## TODO
 
-
+- [ ] Improve the board (will naturally happen)
+- [ ] Add node_exporter to the backend container
+- [ ] Automate more the tests environments
+- [ ] Add different types of algorithms with different type of performance profiles on endpoints, for example
+    - /bubble-sort
+    - /binary-search
+    - /simple-search
+    - /quicksort
+    - /section-sort
+    ...
+- [ ] Add an endpoint that can change the behavior of the `backend` API returning different type of HTTP codes, for example
+    - /return-codes/:http-code/:how-long
+    - /return-random-errors/:how-long
+- [ ] Add a loki container to match logs with the metrics
 - [ ] Make ports for everything configurable
 - [x] ~~Explain how to create the boards~~ (Changed to have a convention on how to load boards)
