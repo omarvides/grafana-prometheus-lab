@@ -4,22 +4,22 @@ services:
     image: grafana/grafana:6.7.2
     ports:
       - 3000:3000
-    networks:
-      - monitoring
     depends_on:
       - prometheus
+    networks:
+      - monitoring
     links:
       - "prometheus:prometheus"
   prometheus:
     image: prom/prometheus:v2.17.1
     ports:
       - 9090:9090
-    networks:
-      - monitoring
-    volumes:
-      - "./prometheus.yaml:/etc/prometheus/prometheus.yml"
     depends_on:
       - backend
+    volumes:
+      - "./prometheus.yaml:/etc/prometheus/prometheus.yml"
+    networks:
+      - monitoring
     links:
       - "backend:backend"
   backend:
@@ -30,6 +30,18 @@ services:
       - 4000:4000
     networks:
       - monitoring
-
+  import-boards:
+    build:
+      context: ./boards
+      dockerfile: Dockerfile
+    depends_on:
+      - grafana
+    volumes:
+      - "./boards/key:/opt/key"
+      - "./boards/import/:/opt/import"
+    networks:
+      - monitoring
+    links:
+      - "grafana:grafana"
 networks:
   monitoring:
